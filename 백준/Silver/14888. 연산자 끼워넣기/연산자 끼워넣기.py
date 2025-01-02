@@ -16,8 +16,8 @@ def dfs(depth, result, add, sub, mul, div):
   if mul:
     dfs(depth + 1, result * num_arr[depth], add, sub, mul - 1, div)
   if div and result<0:
-    dfs(depth + 1, -1*(abs(result)//num_arr[depth]), add, sub, mul, div - 1)
-  elif div and result>=0:
+    dfs(depth + 1, -(-result//num_arr[depth]), add, sub, mul, div - 1)
+  if div and result>=0:
     dfs(depth + 1, result // num_arr[depth], add, sub, mul, div - 1)
 
 
