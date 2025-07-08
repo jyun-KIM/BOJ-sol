@@ -1,25 +1,29 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
-import java.util.Scanner;
 
 class Main {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+    public static void main(String[] args) throws Exception{
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(bf.readLine());
+        int[] A = new int[n];
 
-        int N = in.nextInt();
-        int[] arr = new int[N];
-
-        for (int i=0; i<N; i++){
-            arr[i] = in.nextInt();
+        for(int i=0;i<n;i++){
+            A[i] = Integer.parseInt(bf.readLine());
         }
-
-        in.close();
-
-        Arrays.sort(arr);
-
-        for (int i=0; i<N; i++){
-            System.out.println(arr[i]);
+        for(int i=0;i<n-1;i++){
+            for(int j=0;j<n-1;j++){
+                if(A[j]>A[j+1]){
+                    int temp = A[j];
+                    A[j] = A[j+1];
+                    A[j+1] = temp;
+                }
+            }
+            
         }
+        for(int i=0;i<n;i++){
+            System.out.println(A[i]);
+        }
+        bf.close();
     }
 }
