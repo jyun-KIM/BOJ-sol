@@ -14,7 +14,7 @@ class Main {
         }
 
         int[] dp = new int[n];
-        int answer=0;
+        int answer=arr[0];
         //dp[i]는 i를 포함하는 부분수열 합 최댓값 
         for(int i=0;i<n;i++){
             dp[i]=arr[i];
