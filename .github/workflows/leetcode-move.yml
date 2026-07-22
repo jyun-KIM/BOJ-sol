@@ -12,13 +12,15 @@ on:
 permissions:
   contents: write
 
-# 여러 LeetCode 업로드가 연속으로 발생하면 동시에 실행하지 않음
 concurrency:
   group: move-leetcode-solutions
   cancel-in-progress: false
 
 jobs:
   move-files:
+    # Action이 만든 커밋에는 실행하지 않음
+    if: github.actor != 'github-actions[bot]'
+
     runs-on: ubuntu-latest
 
     steps:
@@ -27,34 +29,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Move LeetCode solutions
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          mkdir -p LeetCode
-
-          moved=false
-
-          for directory in [0-9][0-9][0-9][0-9]-*; do
-            if [[ ! -d "$directory" ]]; then
-              continue
-            fi
-
-            echo "Moving $directory"
-
-            mkdir -p "LeetCode/$directory"
-            cp -a "$directory/." "LeetCode/$directory/"
-            rm -rf "$directory"
-
-            moved=true
-          done
-
-          if [[ "$moved" == false ]]; then
-            echo "No root-level LeetCode directories found."
-          fi
-
-      - name: Commit changes
+      - name: Move and push solutions
         shell: bash
         run: |
           set -euo pipefail
@@ -63,22 +38,57 @@ jobs:
           git config user.email \
             "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -A
+          # LeetHub가 동시에 main을 갱신할 수 있으므로 최대 5번 재시도
+          for attempt in 1 2 3 4 5; do
+            echo "Attempt: $attempt"
 
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-            exit 0
-          fi
+            # 매번 가장 최신 main에서 작업을 다시 시작
+            git fetch origin main
+            git reset --hard origin/main
 
-          git commit \
-            -m "chore: move LeetCode solutions to LeetCode folder"
+            mkdir -p LeetCode
 
-      - name: Rebase and push
-        shell: bash
-        run: |
-          set -euo pipefail
+            moved=false
 
-          # checkout 이후 원격 main이 바뀌었을 수 있으므로 최신 상태 반영
-          git pull --rebase origin main
+            for directory in [0-9][0-9][0-9][0-9]-*; do
+              if [[ ! -d "$directory" ]]; then
+                continue
+              fi
 
-          git push origin HEAD:main
+              echo "Moving $directory"
+
+              destination="LeetCode/$directory"
+
+              mkdir -p "$destination"
+              cp -a "$directory/." "$destination/"
+              rm -rf "$directory"
+
+              moved=true
+            done
+
+            if [[ "$moved" == false ]]; then
+              echo "No root-level LeetCode directories found."
+              exit 0
+            fi
+
+            git add -A
+
+            if git diff --cached --quiet; then
+              echo "No changes to commit."
+              exit 0
+            fi
+
+            git commit \
+              -m "chore: move LeetCode solutions to LeetCode directory"
+
+            if git push origin HEAD:main; then
+              echo "Successfully moved LeetCode solutions."
+              exit 0
+            fi
+
+            echo "Remote main changed. Retrying from latest main."
+            sleep 2
+          done
+
+          echo "Failed to push after 5 attempts."
+          exit 1
