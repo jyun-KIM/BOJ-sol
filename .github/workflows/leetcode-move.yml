@@ -1,16 +1,21 @@
 name: Move LeetCode Solutions
 
 on:
-  workflow_dispatch:
-
   push:
     branches:
       - main
     paths:
       - "[0-9][0-9][0-9][0-9]-*/**"
 
+  workflow_dispatch:
+
 permissions:
   contents: write
+
+# 여러 LeetCode 업로드가 연속으로 발생하면 동시에 실행하지 않음
+concurrency:
+  group: move-leetcode-solutions
+  cancel-in-progress: false
 
 jobs:
   move-files:
@@ -29,40 +34,51 @@ jobs:
 
           mkdir -p LeetCode
 
-          found=false
+          moved=false
 
           for directory in [0-9][0-9][0-9][0-9]-*; do
             if [[ ! -d "$directory" ]]; then
               continue
             fi
 
-            echo "Moving $directory to LeetCode/$directory"
+            echo "Moving $directory"
 
-            # 같은 문제를 다시 제출해 기존 폴더가 있더라도 안전하게 병합
             mkdir -p "LeetCode/$directory"
             cp -a "$directory/." "LeetCode/$directory/"
             rm -rf "$directory"
 
-            found=true
+            moved=true
           done
 
-          if [[ "$found" == false ]]; then
+          if [[ "$moved" == false ]]; then
             echo "No root-level LeetCode directories found."
           fi
 
-      - name: Commit and push changes
+      - name: Commit changes
         shell: bash
         run: |
           set -euo pipefail
 
-          if git diff --quiet && git diff --cached --quiet; then
+          git config user.name "github-actions[bot]"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit \
+            -m "chore: move LeetCode solutions to LeetCode folder"
 
-          git add -A
-          git commit -m "chore: move LeetCode solution into LeetCode directory"
+      - name: Rebase and push
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # checkout 이후 원격 main이 바뀌었을 수 있으므로 최신 상태 반영
+          git pull --rebase origin main
+
           git push origin HEAD:main
