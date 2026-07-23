@@ -35,4 +35,16 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 |  |
 | ------- |
 | [0347-top-k-frequent-elements](https://github.com/jyun-KIM/Problem-Solving/tree/master/0347-top-k-frequent-elements) |
+## String
+|  |
+| ------- |
+| [0394-decode-string](https://github.com/jyun-KIM/Problem-Solving/tree/master/0394-decode-string) |
+## Stack
+|  |
+| ------- |
+| [0394-decode-string](https://github.com/jyun-KIM/Problem-Solving/tree/master/0394-decode-string) |
+## Recursion
+|  |
+| ------- |
+| [0394-decode-string](https://github.com/jyun-KIM/Problem-Solving/tree/master/0394-decode-string) |
 <!---LeetCode Topics End-->
