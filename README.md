@@ -6,6 +6,7 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 ## Array
 |  |
 | ------- |
+| [0238-product-of-array-except-self](https://github.com/jyun-KIM/Problem-Solving/tree/master/0238-product-of-array-except-self) |
 | [0347-top-k-frequent-elements](https://github.com/jyun-KIM/Problem-Solving/tree/master/0347-top-k-frequent-elements) |
 ## Hash Table
 |  |
@@ -47,4 +48,8 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 |  |
 | ------- |
 | [0394-decode-string](https://github.com/jyun-KIM/Problem-Solving/tree/master/0394-decode-string) |
+## Prefix Sum
+|  |
+| ------- |
+| [0238-product-of-array-except-self](https://github.com/jyun-KIM/Problem-Solving/tree/master/0238-product-of-array-except-self) |
 <!---LeetCode Topics End-->
