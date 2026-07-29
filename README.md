@@ -6,11 +6,13 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 ## Array
 |  |
 | ------- |
+| [0128-longest-consecutive-sequence](https://github.com/jyun-KIM/Problem-Solving/tree/master/0128-longest-consecutive-sequence) |
 | [0238-product-of-array-except-self](https://github.com/jyun-KIM/Problem-Solving/tree/master/0238-product-of-array-except-self) |
 | [0347-top-k-frequent-elements](https://github.com/jyun-KIM/Problem-Solving/tree/master/0347-top-k-frequent-elements) |
 ## Hash Table
 |  |
 | ------- |
+| [0128-longest-consecutive-sequence](https://github.com/jyun-KIM/Problem-Solving/tree/master/0128-longest-consecutive-sequence) |
 | [0347-top-k-frequent-elements](https://github.com/jyun-KIM/Problem-Solving/tree/master/0347-top-k-frequent-elements) |
 ## Divide and Conquer
 |  |
@@ -52,4 +54,8 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 |  |
 | ------- |
 | [0238-product-of-array-except-self](https://github.com/jyun-KIM/Problem-Solving/tree/master/0238-product-of-array-except-self) |
+## Union-Find
+|  |
+| ------- |
+| [0128-longest-consecutive-sequence](https://github.com/jyun-KIM/Problem-Solving/tree/master/0128-longest-consecutive-sequence) |
 <!---LeetCode Topics End-->
