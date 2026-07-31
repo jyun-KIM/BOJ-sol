@@ -41,10 +41,12 @@ This is an auto push repository for Baekjoon Online Judge created with [Baekjoon
 ## String
 |  |
 | ------- |
+| [0020-valid-parentheses](https://github.com/jyun-KIM/Problem-Solving/tree/master/0020-valid-parentheses) |
 | [0394-decode-string](https://github.com/jyun-KIM/Problem-Solving/tree/master/0394-decode-string) |
 ## Stack
 |  |
 | ------- |
+| [0020-valid-parentheses](https://github.com/jyun-KIM/Problem-Solving/tree/master/0020-valid-parentheses) |
 | [0394-decode-string](https://github.com/jyun-KIM/Problem-Solving/tree/master/0394-decode-string) |
 ## Recursion
 |  |
